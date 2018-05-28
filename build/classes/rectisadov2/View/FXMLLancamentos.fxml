@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="1027.0" prefWidth="1748.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Clientes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <StackPane prefHeight="998.0" prefWidth="853.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TableView fx:id="tblClientes" prefHeight="998.0" prefWidth="712.0">
+                                <columns>
+                                  <TableColumn fx:id="nrRegistoCliente" editable="false" prefWidth="78.0" style="-fx-alignment: center;" text="Nº Registo" />
+                                  <TableColumn fx:id="dataCliente" prefWidth="94.0" style="-fx-alignment: center;" text="Data" />
+                                    <TableColumn fx:id="descricaoCliente" prefWidth="400.0" style="-fx-alignment: center;" text="Descrição" />
+                                    <TableColumn fx:id="transacoesCliente" minWidth="0.0" prefWidth="101.0" style="-fx-alignment: center;" text="Transações" />
+                                    <TableColumn fx:id="requesicaoCliente" prefWidth="88.0" style="-fx-alignment: center;" text="Requisição" />
+                                    <TableColumn fx:id="valorCliente" prefWidth="85.0" style="-fx-alignment: center;" text="Valor" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </StackPane>
+                        <AnchorPane layoutX="869.0" layoutY="9.0" prefHeight="585.0" prefWidth="395.0">
+                           <children>
+                              <Pane layoutX="14.0" onMouseClicked="#handleTodosLancamentosCliente" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_icon-72-documents_314232.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="24.0" layoutY="93.0" prefHeight="50.0" prefWidth="128.0" text="Todos Lançamentos" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos1" layoutX="210.0" onMouseClicked="#adicionarCompraCliente" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/315479-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="29.0" layoutY="99.0" prefHeight="39.0" prefWidth="117.0" text="Novo Lançamento" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="209.0" layoutY="145.0" onMouseClicked="#handleEditarCompraCliente" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_edit_173002.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="24.0" layoutY="93.0" prefHeight="50.0" prefWidth="128.0" text="Editar Lançamento" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos12" layoutX="14.0" layoutY="146.0" onMouseClicked="#handleVisualizarCompra" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_edit-find_118922.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="11.0" layoutY="93.0" prefHeight="50.0" prefWidth="152.0" text="Visualizar Lançamento" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos13" layoutX="14.0" layoutY="290.0" onMouseClicked="#handleApagarUmaCompraCliente" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_file_delete_48762.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="51.0" layoutY="99.0" prefHeight="39.0" prefWidth="73.0" text="Apagar Um" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos131" layoutX="208.0" layoutY="292.0" onMouseClicked="#handleApagarTodasComprasCliente" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_edit-delete_118920.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="38.0" layoutY="103.0" prefHeight="31.0" prefWidth="99.0" text="Apagar Todos" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos121" layoutX="15.0" layoutY="437.0" onMouseClicked="#imprimirLancamentosCliente" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_fax_318578.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="51.0" layoutY="103.0" prefHeight="31.0" prefWidth="73.0" text="Imprimir" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos122" layoutX="208.0" layoutY="437.0" onMouseClicked="#handleVoltar" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_undo_back_1891408.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="64.0" layoutY="106.0" prefHeight="25.0" prefWidth="73.0" text="Voltar" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="889.0" layoutY="674.0" text="Saldo:" textFill="#5a769f">
+                           <font>
+                              <Font name="Britannic Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblSaldoCliente" layoutX="943.0" layoutY="665.0" prefHeight="36.0" prefWidth="143.0" text="0.0" textFill="#5a769f">
+                           <font>
+                              <Font name="Britannic Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="txtDt1" layoutX="938.0" layoutY="593.0" />
+                        <DatePicker fx:id="txtDt2" layoutX="938.0" layoutY="633.0" />
+                        <Label layoutX="889.0" layoutY="631.0" text="Até" />
+                        <Label layoutX="887.0" layoutY="592.0" text="Data:" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Fornecedores">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <StackPane prefHeight="771.0" prefWidth="854.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TableView fx:id="tblFornecedores" prefHeight="771.0" prefWidth="767.0">
+                                 <columns>
+                                    <TableColumn fx:id="nComprasFornecedor" prefWidth="71.0" text="Nº Registo" />
+                                    <TableColumn fx:id="dataFornecedor" prefWidth="112.0" text="Data" />
+                                    <TableColumn fx:id="descricaoFornecedor" prefWidth="408.0" text="Descrição" />
+                                    <TableColumn fx:id="transacaoFornecedor" prefWidth="89.0" text="Transações" />
+                                    <TableColumn fx:id="requesicaoFornecedor" prefWidth="82.0" text="Requisição" />
+                                    <TableColumn fx:id="valorFornecedor" prefWidth="91.0" text="Valor" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </StackPane>
+                        <AnchorPane layoutX="852.0" layoutY="6.0" prefHeight="589.0" prefWidth="427.0">
+                           <children>
+                              <Pane fx:id="menuLancamentos1" layoutX="14.0" onMouseClicked="#handleTodosLancamentosFornecedor" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_icon-72-documents_314232.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="24.0" layoutY="93.0" prefHeight="50.0" prefWidth="128.0" text="Todos Lançamentos" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos11" layoutX="210.0" onMouseClicked="#handleNovoLancamentoFornecedor" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/315479-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="29.0" layoutY="99.0" prefHeight="39.0" prefWidth="117.0" text="Novo Lançamento" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos111" layoutX="210.0" layoutY="149.0" onMouseClicked="#handleEditarFornecedor" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_edit_173002.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="24.0" layoutY="93.0" prefHeight="50.0" prefWidth="128.0" text="Editar Lançamento" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos121" layoutX="14.0" layoutY="149.0" onMouseClicked="#handleVisualizarCompraFornecedor" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_edit-find_118922.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="11.0" layoutY="93.0" prefHeight="50.0" prefWidth="152.0" text="Visualizar Lançamento" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos1211" layoutX="14.0" layoutY="443.0" onMouseClicked="#handleImprimirFornecedores" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_fax_318578.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="51.0" layoutY="103.0" prefHeight="31.0" prefWidth="73.0" text="Imprimir" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos1221" layoutX="210.0" layoutY="443.0" onMouseClicked="#handleVoltar" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_undo_back_1891408.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="64.0" layoutY="106.0" prefHeight="25.0" prefWidth="73.0" text="Voltar" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos1311" layoutX="210.0" layoutY="297.0" onMouseClicked="#handleApagarTodosFornecedor" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_edit-delete_118920.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="38.0" layoutY="103.0" prefHeight="31.0" prefWidth="99.0" text="Apagar Todos" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="menuLancamentos131" layoutX="14.0" layoutY="297.0" onMouseClicked="#handleApagarUmFornecedor" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                                 <children>
+                                    <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="51.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/if_file_delete_48762.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="51.0" layoutY="99.0" prefHeight="39.0" prefWidth="73.0" text="Apagar Um" textAlignment="CENTER" textFill="#5a769f">
+                                       <font>
+                                          <Font name="Britannic Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                        <Label fx:id="lblSaldoFornecedor" layoutX="926.0" layoutY="668.0" prefHeight="52.0" prefWidth="169.0" text="0.0" textFill="#5a769f">
+                           <font>
+                              <Font name="Britannic Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="867.0" layoutY="685.0" text="Saldo:" textFill="#5a769f">
+                           <font>
+                              <Font name="Britannic Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="txtDtFornecedores1" layoutX="912.0" layoutY="607.0" />
+                        <Label layoutX="867.0" layoutY="647.0" text="Até" />
+                        <DatePicker fx:id="txtDtFornecedores2" layoutX="912.0" layoutY="643.0" />
+                        <Label layoutX="867.0" layoutY="614.0" text="Data:" />
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+            <Tab text="Todos Clientes">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <StackPane prefHeight="771.0" prefWidth="821.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TableView fx:id="tblTodosClientes" prefHeight="778.0" prefWidth="715.0">
+                                 <columns>
+                                    <TableColumn fx:id="nrRegistoTodosClientes" editable="false" prefWidth="67.0" style="-fx-alignment: center;" text="Nº Registo" />
+                                    <TableColumn fx:id="dataTodosCliente" prefWidth="99.0" style="-fx-alignment: center;" text="Data" />
+                                    <TableColumn fx:id="descricaoTodosClientes" prefWidth="340.0" style="-fx-alignment: center;" text="Descrição" />
+                                    <TableColumn fx:id="transacoesTodosClientes" prefWidth="87.0" style="-fx-alignment: center;" text="Transações" />
+                                    <TableColumn fx:id="requesicaoTodosClientes" prefWidth="98.0" style="-fx-alignment: center;" text="Requisição" />
+                                    <TableColumn fx:id="valorTodosClientes" prefWidth="126.0" style="-fx-alignment: center;" text="Valor" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </StackPane>
+                        <Pane fx:id="menuLancamentos1222" layoutX="1031.0" layoutY="336.0" onMouseClicked="#handleVoltar" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                           <children>
+                              <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/if_undo_back_1891408.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="64.0" layoutY="106.0" prefHeight="25.0" prefWidth="73.0" text="Voltar" textAlignment="CENTER" textFill="#5a769f">
+                                 <font>
+                                    <Font name="Britannic Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="1031.0" layoutY="181.0" onMouseClicked="#handleImprimirTodosLancamentosClientes" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                           <children>
+                              <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="52.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/if_fax_318578.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="handleImprimirTodosFornecedores1" layoutX="64.0" layoutY="106.0" prefHeight="25.0" prefWidth="73.0" text="Imprimir" textAlignment="CENTER" textFill="#5a769f">
+                                 <font>
+                                    <Font name="Britannic Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="830.0" layoutY="181.0" onMouseClicked="#handleTodosDocumentosTodosClientes" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                           <children>
+                              <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="52.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/if_icon-72-documents_314232.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="handleImprimirTodosFornecedores11" layoutX="24.0" layoutY="106.0" prefHeight="24.0" prefWidth="130.0" text="Todos Documentos" textAlignment="CENTER" textFill="#5a769f">
+                                 <font>
+                                    <Font name="Britannic Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Label layoutX="826.0" layoutY="34.0" text="Data:" />
+                        <DatePicker fx:id="txtDtTodosClientes1" layoutX="873.0" layoutY="30.0" />
+                        <Label layoutX="830.0" layoutY="70.0" text="Até" />
+                        <DatePicker fx:id="txtDtTodosClientes2" layoutX="873.0" layoutY="66.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Todos Fornecedores">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                     <children>
+                        <StackPane prefHeight="771.0" prefWidth="814.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TableView fx:id="tblTodosFornecedores" prefHeight="771.0" prefWidth="1045.0">
+                                 <columns>
+                                    <TableColumn fx:id="nrRegistoTodosFornecedores" editable="false" prefWidth="79.0" style="-fx-alignment: center;" text="Nº Registo" />
+                                    <TableColumn fx:id="dataTodosFornecedores" prefWidth="105.0" style="-fx-alignment: center;" text="Data" />
+                                    <TableColumn fx:id="descricaoTodosFornecedores" prefWidth="302.0" style="-fx-alignment: center;" text="Descrição" />
+                                    <TableColumn fx:id="transacoesTodosFornecedores" prefWidth="105.0" style="-fx-alignment: center;" text="Transações" />
+                                    <TableColumn fx:id="requesicaoTodosFornecedores" prefWidth="98.0" style="-fx-alignment: center;" text="Requisição" />
+                                    <TableColumn fx:id="valorTodosFornecedores" prefWidth="124.0" style="-fx-alignment: center;" text="Valor" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </StackPane>
+                        <Pane layoutX="1040.0" layoutY="320.0" onMouseClicked="#handleVoltar" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                           <children>
+                              <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/if_undo_back_1891408.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="64.0" layoutY="106.0" prefHeight="25.0" prefWidth="73.0" text="Voltar" textAlignment="CENTER" textFill="#5a769f">
+                                 <font>
+                                    <Font name="Britannic Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="1040.0" layoutY="159.0" onMouseClicked="#handleImprimirTodosLancamentosFornecedor" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                           <children>
+                              <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="52.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/if_fax_318578.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="handleImprimirTodosFornecedores" layoutX="64.0" layoutY="106.0" prefHeight="25.0" prefWidth="73.0" text="Imprimir" textAlignment="CENTER" textFill="#5a769f">
+                                 <font>
+                                    <Font name="Britannic Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="829.0" layoutY="159.0" onMouseClicked="#handleTodosDocumentosTodosFornecedores" prefHeight="132.0" prefWidth="174.0" style="-fx-background-color: #e5e5e5;">
+                           <children>
+                              <ImageView fitHeight="73.0" fitWidth="100.0" layoutX="52.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/if_icon-72-documents_314232.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="handleImprimirTodosFornecedores111" layoutX="24.0" layoutY="106.0" prefHeight="24.0" prefWidth="130.0" text="Todos Documentos" textAlignment="CENTER" textFill="#5a769f">
+                                 <font>
+                                    <Font name="Britannic Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Label layoutX="824.0" layoutY="26.0" text="Data:" />
+                        <DatePicker fx:id="txtDtTodosFornecedores1" layoutX="879.0" layoutY="22.0" />
+                        <DatePicker fx:id="txtDtTodosFornecedores2" layoutX="879.0" layoutY="59.0" />
+                        <Label layoutX="829.0" layoutY="63.0" text="Até" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

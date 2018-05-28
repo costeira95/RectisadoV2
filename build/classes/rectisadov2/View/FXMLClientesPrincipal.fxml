@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="738.0" prefWidth="1065.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutY="-1.0" prefHeight="738.0" prefWidth="592.0">
+         <children>
+            <TableView fx:id="tblClientes" prefHeight="738.0" prefWidth="592.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="clienteColunaNumero" editable="false" prefWidth="150.99996948242188" style="-fx-alignment: center;" text="Numero" />
+                <TableColumn fx:id="clienteColunaNome" editable="false" prefWidth="440.0" sortType="DESCENDING" style="-fx-alignment: center;" text="Nome" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="597.0" layoutY="160.0" prefHeight="346.0" prefWidth="468.0">
+         <children>
+            <AnchorPane layoutX="14.0" layoutY="14.0" onMouseClicked="#handleAdicionar" prefHeight="156.0" prefWidth="164.0">
+               <children>
+                  <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/if_add-user_46775.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="29.0" layoutY="110.0" text="Adicionar" textFill="#5a769f">
+                     <font>
+                        <Font name="Britannic Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="234.0" layoutY="14.0" onMouseClicked="#handleEditar" prefHeight="156.0" prefWidth="164.0">
+               <children>
+                  <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/if_edit-user_46799.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="29.0" layoutY="110.0" onKeyPressed="#handleEditar" text="Editar" textFill="#5a769f">
+                     <font>
+                        <Font name="Britannic Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="14.0" layoutY="170.0" onMouseClicked="#handleSelecionar" prefHeight="156.0" prefWidth="164.0">
+               <children>
+                  <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/if_user_46842.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="29.0" layoutY="110.0" text="Selecionar" textFill="#5a769f">
+                     <font>
+                        <Font name="Britannic Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="234.0" layoutY="170.0" onMouseClicked="#handleVoltar" prefHeight="156.0" prefWidth="164.0">
+               <children>
+                  <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="33.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/if_undo_back_1891408.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="50.0" layoutY="109.0" text="Voltar" textFill="#5a769f">
+                     <font>
+                        <Font name="Britannic Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="597.0" layoutY="14.0" prefHeight="139.0" prefWidth="454.0">
+         <children>
+            <TextField fx:id="txtSearch" layoutX="123.0" layoutY="23.0" prefHeight="34.0" prefWidth="210.0" />
+            <ImageView fitHeight="64.0" fitWidth="59.0" layoutX="45.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/if_search-user_46833.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="LblSelecionado" layoutX="123.0" layoutY="93.0" prefHeight="34.0" prefWidth="210.0" text="Nenhum cliente selecionado!" />
+            <Label layoutX="45.0" layoutY="101.0" text="Selecionado: " />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

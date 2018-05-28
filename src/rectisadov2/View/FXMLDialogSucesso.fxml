@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="364.0" prefWidth="688.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/if_11_330397.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblSucesso" layoutX="170.0" layoutY="107.0" prefHeight="150.0" prefWidth="514.0" text="Adicionado com sucesso!" textFill="#5a769f">
+         <font>
+            <Font name="Britannic Bold" size="19.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="510.0" layoutY="220.0" onMouseClicked="#handleVoltar" prefHeight="130.0" prefWidth="164.0">
+         <children>
+            <ImageView fitHeight="82.0" fitWidth="98.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/if_undo_back_1891408.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="54.0" layoutY="99.0" text="Voltar" textFill="#5a769f">
+               <font>
+                  <Font name="Britannic Bold" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

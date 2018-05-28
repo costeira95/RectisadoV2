@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="RectisadoV2.jnlp">
+  <information>
+    <title>RectisadoV2</title>
+    <vendor>Costeira</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="RectisadoV2.jar" size="414582" download="eager" />
+    <jar href="lib\itextpdf-5.5.12.jar" size="2320211" download="eager" />
+    <jar href="lib\mongo-java-driver-3.6.3.jar" size="1897181" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="RectisadoV2" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="rectisadov2.AppStart"  name="RectisadoV2" />
+  <update check="always"/>
+</jnlp>
