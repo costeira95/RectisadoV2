@@ -22,6 +22,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import rectisadov2.AppStart;
 import rectisadov2.Controller.FXMLDialogSucessoController;
+import rectisadov2.model.Cliente;
 import rectisadov2.model.Compras;
 import rectisadov2.model.ECredito;
 import rectisadov2.model.Gestor;
@@ -77,21 +78,22 @@ public class FXMLAdicionarCompraFornecedorController extends Stage {
 
     @FXML
     void handleAdicionar(MouseEvent event) {
+        Cliente fornecedorActual = Gestor.getInstanceFornecedores().getFornecedorActual();
         if(dtCompra.getValue() == null) {
-            Gestor.getInstanceFornecedores().getFornecedorActual().adicionarCompra(new Compras(
+            fornecedorActual.adicionarCompra(new Compras(
                     txtDescricao.getText(), 
                     Double.parseDouble(txtValor.getText())
                     ,Integer.parseInt(txtRequesicao.getText()), 
-                    cbTransacao.getSelectionModel().getSelectedItem()), "fornecedor");
+                    cbTransacao.getSelectionModel().getSelectedItem(), fornecedorActual.getNome()), "fornecedor");
         }
           
           else {
-              Gestor.getInstanceFornecedores().getFornecedorActual().adicionarCompra(new Compras(
+              fornecedorActual.adicionarCompra(new Compras(
                     txtDescricao.getText(), 
                     Double.parseDouble(txtValor.getText())
                     ,Integer.parseInt(txtRequesicao.getText()), 
                     cbTransacao.getSelectionModel().getSelectedItem(),
-                    dtCompra.getValue()), "fornecedor");
+                    dtCompra.getValue(), fornecedorActual.getNome()), "fornecedor");
           }
           List<Compras> compras = Gestor.getInstanceFornecedores().getFornecedorActual().getListaCompras("fornecedores");
           compras.sort(Compras.comparator);

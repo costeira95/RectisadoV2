@@ -330,6 +330,7 @@
                               <TableView fx:id="tblTodosClientes" prefHeight="778.0" prefWidth="715.0">
                                  <columns>
                                     <TableColumn fx:id="nrRegistoTodosClientes" editable="false" prefWidth="67.0" style="-fx-alignment: center;" text="Nº Registo" />
+                                    <TableColumn fx:id="ClienteTodosClientes" prefWidth="75.0" text="Cliente" />
                                     <TableColumn fx:id="dataTodosCliente" prefWidth="99.0" style="-fx-alignment: center;" text="Data" />
                                     <TableColumn fx:id="descricaoTodosClientes" prefWidth="340.0" style="-fx-alignment: center;" text="Descrição" />
                                     <TableColumn fx:id="transacoesTodosClientes" prefWidth="87.0" style="-fx-alignment: center;" text="Transações" />
@@ -398,6 +399,7 @@
                               <TableView fx:id="tblTodosFornecedores" prefHeight="771.0" prefWidth="1045.0">
                                  <columns>
                                     <TableColumn fx:id="nrRegistoTodosFornecedores" editable="false" prefWidth="79.0" style="-fx-alignment: center;" text="Nº Registo" />
+                                    <TableColumn fx:id="FornecedorTodosFornecedores" prefWidth="75.0" text="Fornecedor" />
                                     <TableColumn fx:id="dataTodosFornecedores" prefWidth="105.0" style="-fx-alignment: center;" text="Data" />
                                     <TableColumn fx:id="descricaoTodosFornecedores" prefWidth="302.0" style="-fx-alignment: center;" text="Descrição" />
                                     <TableColumn fx:id="transacoesTodosFornecedores" prefWidth="105.0" style="-fx-alignment: center;" text="Transações" />

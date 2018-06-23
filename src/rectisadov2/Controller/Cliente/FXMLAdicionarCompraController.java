@@ -22,6 +22,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import rectisadov2.AppStart;
 import rectisadov2.Controller.FXMLDialogSucessoController;
+import rectisadov2.model.Cliente;
 import rectisadov2.model.Compras;
 import rectisadov2.model.ECredito;
 import rectisadov2.model.Gestor;
@@ -78,20 +79,22 @@ public class FXMLAdicionarCompraController extends Stage {
     @FXML
     void handleAdicionar(MouseEvent event) {
         try {
-          if(dtCompra.getValue() == null)
+          if(dtCompra.getValue() == null) {
             Gestor.getInstance().getClienteActual().adicionarCompra(new Compras(
                     txtDescricao.getText(), 
                     Double.parseDouble(txtValor.getText())
                     ,Integer.parseInt(txtRequesicao.getText()), 
-                    cbTransacao.getSelectionModel().getSelectedItem()), "cliente");
+                    cbTransacao.getSelectionModel().getSelectedItem(), Gestor.getInstance().getClienteActual().getNome()), "cliente");
+          }
           
-          else
+          else {
               Gestor.getInstance().getClienteActual().adicionarCompra(new Compras(
                     txtDescricao.getText(), 
                     Double.parseDouble(txtValor.getText())
                     ,Integer.parseInt(txtRequesicao.getText()), 
                     cbTransacao.getSelectionModel().getSelectedItem(),
-                    dtCompra.getValue()), "cliente");
+                    dtCompra.getValue(), Gestor.getInstance().getClienteActual().getNome()), "cliente");
+          }
           List<Compras> compras = Gestor.getInstance().getClienteActual().getListaCompras("clientes");
           compras.sort(Compras.comparator);
           tblView.setItems(FXCollections.observableArrayList(compras));

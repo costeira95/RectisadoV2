@@ -147,7 +147,7 @@ public class DaoImp implements IUtilizadorDAO<Cliente, Compras>{
                       c.getString("_id"),
                       c.getString("descricao"), c.getDouble("valor"), 
                       c.getInteger("requesicao"), ECredito.valueOf(c.getString("tipoCredito")), 
-                      LocalDate.parse(c.getString("data"))));
+                      LocalDate.parse(c.getString("data")), c.getString("cliente")));
           
           return compras;
     }
@@ -185,6 +185,7 @@ public class DaoImp implements IUtilizadorDAO<Cliente, Compras>{
 
     @Override
     public boolean adicionarCompra(Cliente utilizador, Compras compra) {
+        System.out.println("teste");
         Document user = findUser(utilizador);
         BasicDBObject update = new BasicDBObject();
         BasicDBObject c = new BasicDBObject();
@@ -195,6 +196,7 @@ public class DaoImp implements IUtilizadorDAO<Cliente, Compras>{
         novaCompra.append("requesicao", compra.getRequesicao());
         novaCompra.append("tipoCredito", compra.getTipoCredito().toString());
         novaCompra.append("data", compra.getData().toString());
+        novaCompra.append("cliente", compra.getCliente());
         c.append("compras", novaCompra);
         update.append("$push", c);
         dataSource.getCollection().updateOne(user, update);
@@ -294,7 +296,7 @@ public class DaoImp implements IUtilizadorDAO<Cliente, Compras>{
                           c.getString("_id"),
                           c.getString("descricao"), c.getDouble("valor"), 
                           c.getInteger("requesicao"), ECredito.valueOf(c.getString("tipoCredito")), 
-                          LocalDate.parse(c.getString("data"))));
+                          LocalDate.parse(c.getString("data")), c.getString("cliente")));
         }
         return compras;
     }

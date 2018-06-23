@@ -121,6 +121,9 @@ public class FXMLLancamentosController extends Stage {
 
     @FXML
     private TableColumn<Compras, Integer> requesicaoTodosClientes;
+    
+    @FXML
+    private TableColumn<Compras, String> ClienteTodosClientes;
 
     @FXML
     private TableColumn<Compras, Double> valorTodosClientes;
@@ -151,6 +154,9 @@ public class FXMLLancamentosController extends Stage {
 
     @FXML
     private TableColumn<Compras, Double> valorTodosFornecedores;
+    
+    @FXML
+    private TableColumn<Compras, String> FornecedorTodosFornecedores;
 
     @FXML
     private DatePicker txtDtTodosFornecedores1;
@@ -218,6 +224,7 @@ public class FXMLLancamentosController extends Stage {
         descricaoTodosClientes.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         transacoesTodosClientes.setCellValueFactory(new PropertyValueFactory<>("tipoCredito"));
         requesicaoTodosClientes.setCellValueFactory(new PropertyValueFactory<>("requesicao"));
+        ClienteTodosClientes.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         valorTodosClientes.setCellValueFactory(new PropertyValueFactory<>("valor"));
         tblTodosClientes.setItems(FXCollections.observableArrayList(Gestor.getInstance().getDAO()
                 .todasAsComprasEntreDatas(LocalDate.parse(ano+"-01-01"), LocalDate.parse(ano+"-12-31")).getElements()));
@@ -232,6 +239,7 @@ public class FXMLLancamentosController extends Stage {
         dataTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("data"));
         dataTodosFornecedores.setSortType(TableColumn.SortType.DESCENDING);
         descricaoTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        FornecedorTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("cliente"));
         transacoesTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("tipoCredito"));
         requesicaoTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("requesicao"));
         valorTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("valor"));

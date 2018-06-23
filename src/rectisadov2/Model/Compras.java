@@ -24,8 +24,9 @@ public class Compras {
     private int requesicao;
     private double valor;
     private ECredito tipoCredito;
+    private String cliente;
 
-    public Compras(String descricao, double valor, int requesicao, ECredito tipoCredito) {
+    public Compras(String descricao, double valor, int requesicao, ECredito tipoCredito, String cliente) {
         this.id = UUID.randomUUID().toString();
         LocalDate orderDate = LocalDate.now();
         String fDate = orderDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -34,9 +35,10 @@ public class Compras {
         this.valor = valor;
         this.requesicao = requesicao;
         this.tipoCredito = tipoCredito;
+        this.cliente = cliente;
     }
     
-    public Compras(String descricao, double valor, int requesicao, ECredito tipoCredito, LocalDate data) {
+    public Compras(String descricao, double valor, int requesicao, ECredito tipoCredito, LocalDate data, String cliente) {
         this.id = UUID.randomUUID().toString();
         LocalDate orderDate = data;
         String fDate = orderDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -45,9 +47,10 @@ public class Compras {
         this.valor = valor;
         this.requesicao = requesicao;
         this.tipoCredito = tipoCredito;
+        this.cliente = cliente;
     }
     
-    public Compras(String id, String descricao, double valor, int requesicao, ECredito tipoCredito, LocalDate data) {
+    public Compras(String id, String descricao, double valor, int requesicao, ECredito tipoCredito, LocalDate data, String cliente) {
         this.id = id;
         LocalDate orderDate = data;
         String fDate = orderDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -56,6 +59,7 @@ public class Compras {
         this.valor = valor;
         this.requesicao = requesicao;
         this.tipoCredito = tipoCredito;
+        this.cliente = cliente;
     }
 
     public Compras() {
@@ -107,6 +111,14 @@ public class Compras {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public String getCliente() {
+        return this.cliente;
+    }
+    
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     
