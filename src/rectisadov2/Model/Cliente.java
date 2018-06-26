@@ -105,9 +105,9 @@ public class Cliente {
     }
     
     //Todas as compras feitas pelo cliente
-    public Double SaldoCliente() {
+    public Double SaldoCliente(String tipoCliente) {
         double saldo = 0;
-        List<Compras> compra = compras.getElements();
+        List<Compras> compra = getListaCompras(tipoCliente);
         for(Compras c : compra) {
             if(c.getTipoCredito().equals(ECredito.CREDITO))
                 saldo += c.getValor();
@@ -174,7 +174,6 @@ public class Cliente {
     
     private void loadCompras(String tipoCliente) {
         if(tipoCliente == "fornecedores") {
-            System.out.println("sadas");
             this.compras = Gestor.getInstanceFornecedores().getDAO().getCompras(this);
         }
         else
