@@ -8,10 +8,14 @@ package rectisadov2.Controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import rectisadov2.AppStart;
 import rectisadov2.Controller.Cliente.FXMLAdicionarCompraController;
 import rectisadov2.Controller.Cliente.FXMLEditarCompraController;
@@ -105,28 +110,19 @@ public class FXMLLancamentosController extends Stage {
     private DatePicker txtDtFornecedores2;
     
     @FXML
-    private TableView<Compras> tblTodosClientes;
+    private TableView<Cliente> tblTodosClientes;
 
     @FXML
-    private TableColumn<Compras, Integer> nrRegistoTodosClientes;
+    private TableColumn<Cliente, String> ClienteTodosClientes;
 
     @FXML
-    private TableColumn<Compras, LocalDate> dataTodosCliente;
+    private TableColumn<Cliente, Double> debitoTodosClientes;
 
     @FXML
-    private TableColumn<Compras, String> descricaoTodosClientes;
+    private TableColumn<Cliente, Double> creditoTodosClientes;
 
     @FXML
-    private TableColumn<Compras, ECredito> transacoesTodosClientes;
-
-    @FXML
-    private TableColumn<Compras, Integer> requesicaoTodosClientes;
-    
-    @FXML
-    private TableColumn<Compras, String> ClienteTodosClientes;
-
-    @FXML
-    private TableColumn<Compras, Double> valorTodosClientes;
+    private TableColumn<Cliente, Double> saldoTodosClientes;
 
     @FXML
     private DatePicker txtDtTodosClientes1;
@@ -218,17 +214,26 @@ public class FXMLLancamentosController extends Stage {
          * á variavel em questão
          * 
          */
-        nrRegistoTodosClientes.setCellFactory(new NumberTableCellFactory<>(1));
-        dataTodosCliente.setCellValueFactory(new PropertyValueFactory<>("data"));
-        dataTodosCliente.setSortType(TableColumn.SortType.DESCENDING);
-        descricaoTodosClientes.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        transacoesTodosClientes.setCellValueFactory(new PropertyValueFactory<>("tipoCredito"));
-        requesicaoTodosClientes.setCellValueFactory(new PropertyValueFactory<>("requesicao"));
-        ClienteTodosClientes.setCellValueFactory(new PropertyValueFactory<>("cliente"));
-        valorTodosClientes.setCellValueFactory(new PropertyValueFactory<>("valor"));
-        tblTodosClientes.setItems(FXCollections.observableArrayList(Gestor.getInstance().getDAO()
-                .todasAsComprasEntreDatas(LocalDate.parse(ano+"-01-01"), LocalDate.parse(ano+"-12-31")).getElements()));
-        tblTodosClientes.getSortOrder().add(dataTodosCliente);
+        ClienteTodosClientes.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        debitoTodosClientes.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente, Double>, ObservableValue<Double>>() {
+            @Override
+            public ObservableValue<Double> call(TableColumn.CellDataFeatures<Cliente, Double> param) {
+                return new SimpleObjectProperty<>(param.getValue().totalDebito("Cliente"));
+            }
+        });
+        creditoTodosClientes.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente, Double>, ObservableValue<Double>>() {
+            @Override
+            public ObservableValue<Double> call(TableColumn.CellDataFeatures<Cliente, Double> param) {
+                return new SimpleObjectProperty<>(param.getValue().totalCredito("Cliente"));
+            }
+        });
+        saldoTodosClientes.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente, Double>, ObservableValue<Double>>() {
+            @Override
+            public ObservableValue<Double> call(TableColumn.CellDataFeatures<Cliente, Double> param) {
+                return new SimpleObjectProperty<>(param.getValue().SaldoCliente("Cliente"));
+            }
+        });
+        tblTodosClientes.setItems(FXCollections.observableArrayList(Gestor.getInstance().todosClientes()));
         /********************************************************************
          * 
          * Cria os titulos da tableview de todos os fornecedores e associa
@@ -548,12 +553,12 @@ public class FXMLLancamentosController extends Stage {
     
      @FXML
     void handleTodosDocumentosTodosClientes(MouseEvent event) {
-        txtDtTodosClientes1.setValue(null);
+        /*txtDtTodosClientes1.setValue(null);
         txtDtTodosClientes2.setValue(null);
         List<Compras> compras = Gestor.getInstance().getDAO()
         .todasAsComprasEntreDatas(LocalDate.parse(ano+"-01-01"), LocalDate.parse(ano+"-12-31")).getElements();
         compras.sort(Compras.comparator);
-        tblTodosClientes.setItems(FXCollections.observableArrayList(compras));
+        tblTodosClientes.setItems(FXCollections.observableArrayList(compras));*/
     }
 
     @FXML
@@ -668,14 +673,14 @@ public class FXMLLancamentosController extends Stage {
          * todos os clientes
          */
         txtDtTodosClientes1.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if(Gestor.getInstance().getDAO().todasAsComprasNumaDatas(newValue) == null)
+            /*if(Gestor.getInstance().getDAO().todasAsComprasNumaDatas(newValue) == null)
                 tblTodosClientes.setItems(null);
             else {
                 this.dataGuardadaTodosClientes = newValue;
                 List<Compras> compras = Gestor.getInstance().getDAO().todasAsComprasNumaDatas(dataGuardadaTodosClientes).getElements();
                 compras.sort(Compras.comparator);
                 tblTodosClientes.setItems(FXCollections.observableArrayList(compras));
-            }
+            }*/
         });
         /********************************************************
          * selecionar entre datas de todos os clientes
@@ -683,13 +688,13 @@ public class FXMLLancamentosController extends Stage {
          */
         
         txtDtTodosClientes2.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if(Gestor.getInstance().getDAO().todasAsComprasEntreDatas(dataGuardadaTodosClientes, newValue) == null)
+            /*if(Gestor.getInstance().getDAO().todasAsComprasEntreDatas(dataGuardadaTodosClientes, newValue) == null)
                 tblTodosClientes.setItems(null);
             else {
                 List<Compras> compras = Gestor.getInstance().getDAO().todasAsComprasEntreDatas(dataGuardadaTodosClientes, newValue).getElements();
                 compras.sort(Compras.comparator);
                 tblTodosClientes.setItems(FXCollections.observableArrayList(compras));
-            }
+            }*/
 
         });
         

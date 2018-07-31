@@ -329,13 +329,10 @@
                            <children>
                               <TableView fx:id="tblTodosClientes" prefHeight="778.0" prefWidth="715.0">
                                  <columns>
-                                    <TableColumn fx:id="nrRegistoTodosClientes" editable="false" prefWidth="67.0" style="-fx-alignment: center;" text="Nº Registo" />
-                                    <TableColumn fx:id="ClienteTodosClientes" prefWidth="75.0" text="Cliente" />
-                                    <TableColumn fx:id="dataTodosCliente" prefWidth="99.0" style="-fx-alignment: center;" text="Data" />
-                                    <TableColumn fx:id="descricaoTodosClientes" prefWidth="340.0" style="-fx-alignment: center;" text="Descrição" />
-                                    <TableColumn fx:id="transacoesTodosClientes" prefWidth="87.0" style="-fx-alignment: center;" text="Transações" />
-                                    <TableColumn fx:id="requesicaoTodosClientes" prefWidth="98.0" style="-fx-alignment: center;" text="Requisição" />
-                                    <TableColumn fx:id="valorTodosClientes" prefWidth="126.0" style="-fx-alignment: center;" text="Valor" />
+                                    <TableColumn fx:id="ClienteTodosClientes" editable="false" prefWidth="269.0" style="-fx-alignment: center;" text="Cliente" />
+                                    <TableColumn fx:id="debitoTodosClientes" prefWidth="161.0" style="-fx-alignment: center;" text="Debito" />
+                                    <TableColumn fx:id="creditoTodosClientes" prefWidth="184.0" style="-fx-alignment: center;" text="Credito" />
+                                    <TableColumn fx:id="saldoTodosClientes" prefWidth="206.0" style="-fx-alignment: center;" text="Saldo" />
                                  </columns>
                               </TableView>
                            </children>

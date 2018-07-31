@@ -18,12 +18,17 @@ import rectisadov2.model.Exceptions.DescricaoVazioException;
  * @author Costeira
  */
 public class Cliente {
+    
     private String id;
     private String nome;
     private String morada;
     private String codPost;
     private int numeroContribuinte;
     private boolean carregado;
+    
+    private double debito;
+    private double credito;
+    private double saldo;
     
     private IContainerOperations<Compras> compras;
     
@@ -90,6 +95,7 @@ public class Cliente {
         this.numeroContribuinte = numeroContribuinte;
     }
 
+    // editar o cliente
     public void editarCliente(String nome, String morada, String codPost, int numeroContribuinte) {
         if(nome.isEmpty()) throw new NomeVazioException();
         this.nome = nome;
@@ -104,17 +110,33 @@ public class Cliente {
         return this.compras.getElements();
     }
     
-    //Todas as compras feitas pelo cliente
+    //Saldo do cliente
     public Double SaldoCliente(String tipoCliente) {
-        double saldo = 0;
+        this.saldo=0;
+        this.saldo = (totalDebito(tipoCliente) - totalCredito(tipoCliente));
+        return saldo;
+    }
+    
+    //total de debito do utilizador
+    public Double totalDebito(String tipoCliente) {
+        this.debito = 0;
+        List<Compras> compra = getListaCompras(tipoCliente);
+        for(Compras c : compra) {
+            if(c.getTipoCredito().equals(ECredito.DEBITO))
+                this.debito += c.getValor();
+        }
+        return debito;
+    }
+    
+    // total de credito do utilizador
+    public Double totalCredito(String tipoCliente) {
+        this.credito = 0;
         List<Compras> compra = getListaCompras(tipoCliente);
         for(Compras c : compra) {
             if(c.getTipoCredito().equals(ECredito.CREDITO))
-                saldo += c.getValor();
-            else
-                saldo -=c.getValor();
+                this.credito += c.getValor();
         }
-        return saldo;
+        return credito;
     }
     
     //Compras feitas num determinado dia

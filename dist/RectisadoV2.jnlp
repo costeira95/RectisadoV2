@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="RectisadoV2.jar" size="414866" download="eager" />
+    <jar href="RectisadoV2.jar" size="417841" download="eager" />
     <jar href="lib\itextpdf-5.5.12.jar" size="2320211" download="eager" />
     <jar href="lib\mongo-java-driver-3.6.3.jar" size="1897181" download="eager" />
   </resources>

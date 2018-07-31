@@ -74,7 +74,7 @@ public class Gestor extends ContainerList<Cliente> {
     }
     
     //obter todos os clientes
-    public List todosClientes() {
+    public List<Cliente> todosClientes() {
         return this.getElements();
     }
 
@@ -108,7 +108,7 @@ public class Gestor extends ContainerList<Cliente> {
 
     public void setFornecedoresCarregados(boolean fornecedoresCarregados) {
         this.fornecedoresCarregados = fornecedoresCarregados;
-    }
+    } 
     
     public void load() {
         IContainerOperations clientes = DAO.getUtilizadores();

@@ -6,6 +6,7 @@
 package rectisadov2;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import rectisadov2.Controller.FXMLMainController;
+import rectisadov2.model.Cliente;
+import rectisadov2.model.Gestor;
 
 /**
  *
