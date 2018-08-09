@@ -7,6 +7,7 @@ package rectisadov2.model;
 
 import rectisadov2.model.Exceptions.NomeVazioException;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
 import rectisadov2.containers.ContainerList;
@@ -111,16 +112,16 @@ public class Cliente {
     }
     
     //Saldo do cliente
-    public Double SaldoCliente(String tipoCliente) {
+    public Double SaldoCliente(String tipoCliente, LocalDate dataInicio, LocalDate dataFim) {
         this.saldo=0;
-        this.saldo = (totalDebito(tipoCliente) - totalCredito(tipoCliente));
+        this.saldo = (totalDebito(tipoCliente, dataInicio, dataFim) - totalCredito(tipoCliente, dataInicio, dataFim));
         return saldo;
     }
     
     //total de debito do utilizador
-    public Double totalDebito(String tipoCliente) {
+    public Double totalDebito(String tipoCliente, LocalDate dataInicio, LocalDate dataFim) {
         this.debito = 0;
-        List<Compras> compra = getListaCompras(tipoCliente);
+        List<Compras> compra = ValidarListaDeCompras(dataInicio, dataFim, tipoCliente);
         for(Compras c : compra) {
             if(c.getTipoCredito().equals(ECredito.DEBITO))
                 this.debito += c.getValor();
@@ -129,14 +130,24 @@ public class Cliente {
     }
     
     // total de credito do utilizador
-    public Double totalCredito(String tipoCliente) {
+    public Double totalCredito(String tipoCliente, LocalDate dataInicio, LocalDate dataFim) {
         this.credito = 0;
-        List<Compras> compra = getListaCompras(tipoCliente);
+        List<Compras> compra = ValidarListaDeCompras(dataInicio, dataFim, tipoCliente);
         for(Compras c : compra) {
             if(c.getTipoCredito().equals(ECredito.CREDITO))
                 this.credito += c.getValor();
         }
         return credito;
+    }
+    
+    // Função para obter a lista de compras correcta
+    public List<Compras> ValidarListaDeCompras(LocalDate dataInicio, LocalDate dataFim, String tipoUtilizador) {
+        String ano = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+        if(dataInicio != null && dataFim == null) 
+            return getListaComprasDia(dataInicio, tipoUtilizador);
+         else if(dataInicio!=null && dataFim != null) 
+            return getListaComprasEntreDatas(dataInicio, dataFim, tipoUtilizador);
+        return getListaComprasEntreDatas(LocalDate.parse(ano+"-01-01"), LocalDate.parse(ano+"-12-31"), tipoUtilizador);
     }
     
     //Compras feitas num determinado dia
@@ -152,7 +163,7 @@ public class Cliente {
     //entre datas
     public List<Compras> getListaComprasEntreDatas(LocalDate diaInicio, LocalDate diaFim, String tipoUtilizador) {
         IContainerOperations comprasAux;
-        if(tipoUtilizador =="clientes")
+        if(tipoUtilizador == "clientes") 
             comprasAux = Gestor.getInstance().getDAO().comprasEntreDias(this, diaInicio, diaFim);
         else
             comprasAux = Gestor.getInstanceFornecedores().getDAO().comprasEntreDias(this, diaInicio, diaFim);

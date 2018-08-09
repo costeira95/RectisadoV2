@@ -6,6 +6,8 @@
 package rectisadov2;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.bson.types.ObjectId;
 import rectisadov2.Controller.FXMLMainController;
 import rectisadov2.model.Cliente;
+import rectisadov2.model.Compras;
+import rectisadov2.model.ECredito;
 import rectisadov2.model.Gestor;
 
 /**
@@ -37,7 +42,9 @@ public class AppStart extends Application {
         }catch(IOException e){
                System.out.println(e.getMessage());
         }
-        
+        /************************
+         * Abrir ecra principal
+         */
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.centerOnScreen();

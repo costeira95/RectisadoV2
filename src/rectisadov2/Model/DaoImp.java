@@ -65,12 +65,9 @@ public class DaoImp implements IUtilizadorDAO<Cliente, Compras>{
 
     @Override
     public Cliente getUtilizador(Cliente utilizador) {
-        Document document = (Document) dataSource.getCollection()
-                  .find(eq("_id", new ObjectId(utilizador.getId())))
-                  .projection(Projections.fields(Projections.include("nome"))).first();
-        
-        Cliente cliente = new Cliente(document.getString("_id"), document.getString("nome"),
-        document.getString("morada"), document.getString("codPost"), document.getInteger("contribuinte"));
+        Document d = findUser(utilizador);
+        Cliente cliente = new Cliente(d.get("_id").toString(), d.get("nome").toString(), d.getString("morada").toString(), 
+                      d.getString("codPost").toString(),Integer.parseInt(d.get("contribuinte").toString()));
         return cliente;
     }
     
@@ -185,7 +182,6 @@ public class DaoImp implements IUtilizadorDAO<Cliente, Compras>{
 
     @Override
     public boolean adicionarCompra(Cliente utilizador, Compras compra) {
-        System.out.println("teste");
         Document user = findUser(utilizador);
         BasicDBObject update = new BasicDBObject();
         BasicDBObject c = new BasicDBObject();
