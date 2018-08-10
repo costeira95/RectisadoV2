@@ -5,17 +5,13 @@
             <url>src/rectisadov2/Controller/FXMLLancamentosController.java</url>
             <bookmark id="1">
                 <name/>
-                <line>124</line>
+                <line>127</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Costeira/Documents/NetBeansProjects/RectisadoV2/src/rectisadov2/Controller/FXMLMainController.java</file>
-            <file>file:/C:/Users/Costeira/Documents/NetBeansProjects/RectisadoV2/src/rectisadov2/Model/Gestor.java</file>
-            <file>file:/C:/Users/Costeira/Documents/NetBeansProjects/RectisadoV2/src/rectisadov2/AppStart.java</file>
-            <file>file:/C:/Users/Costeira/Documents/NetBeansProjects/RectisadoV2/src/rectisadov2/Model/Cliente.java</file>
             <file>file:/C:/Users/Costeira/Documents/NetBeansProjects/RectisadoV2/src/rectisadov2/Controller/FXMLLancamentosController.java</file>
         </group>
     </open-files>

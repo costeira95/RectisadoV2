@@ -34,6 +34,7 @@ import rectisadov2.AppStart;
 import rectisadov2.Controller.Cliente.FXMLAdicionarCompraController;
 import rectisadov2.Controller.Cliente.FXMLEditarCompraController;
 import rectisadov2.Controller.Fornecedor.FXMLAdicionarCompraFornecedorController;
+import rectisadov2.Model.PDF.GerarPDFTodos;
 import rectisadov2.model.NumberTableCellFactory;
 import rectisadov2.model.Cliente;
 import rectisadov2.model.Compras;
@@ -51,7 +52,8 @@ public class FXMLLancamentosController extends Stage {
     private AppStart appStart;
     private LocalDate dataGuardada;
     private LocalDate dataGuardadaFornecedores;
-    private LocalDate dataGuardadaTodosFornecedores;
+    private LocalDate dataGuardadaTodosFornecedoresInicio;
+    private LocalDate dataGuardadaTodosFornecedoresFim;
     private LocalDate dataGuardadaTodosClientesInicio;
     private LocalDate dataGuardadaTodosClientesFim;
     private String ano;
@@ -132,28 +134,19 @@ public class FXMLLancamentosController extends Stage {
     private DatePicker txtDtTodosClientes2;
 
     @FXML
-    private TableView<Compras> tblTodosFornecedores;
-
-    @FXML
-    private TableColumn<Compras, Void> nrRegistoTodosFornecedores;
-
-    @FXML
-    private TableColumn<Compras, LocalDate> dataTodosFornecedores;
-
-    @FXML
-    private TableColumn<Compras, String> descricaoTodosFornecedores;
-
-    @FXML
-    private TableColumn<Compras, ECredito> transacoesTodosFornecedores;
-
-    @FXML
-    private TableColumn<Compras, Integer> requesicaoTodosFornecedores;
-
-    @FXML
-    private TableColumn<Compras, Double> valorTodosFornecedores;
+    private TableView<Cliente> tblTodosFornecedores;
     
     @FXML
-    private TableColumn<Compras, String> FornecedorTodosFornecedores;
+    private TableColumn<Cliente, String> FornecedorTodosFornecedores;
+
+    @FXML
+    private TableColumn<Cliente, Double> debitoTodosFornecedores;
+
+    @FXML
+    private TableColumn<Cliente, Double> creditoTodosFornecedores;
+
+    @FXML
+    private TableColumn<Cliente, Double> saldoTodosFornecedores;
 
     @FXML
     private DatePicker txtDtTodosFornecedores1;
@@ -243,17 +236,26 @@ public class FXMLLancamentosController extends Stage {
          * á variavel em questão
          * 
          */
-        nrRegistoTodosFornecedores.setCellFactory(new NumberTableCellFactory<>(1));
-        dataTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("data"));
-        dataTodosFornecedores.setSortType(TableColumn.SortType.DESCENDING);
-        descricaoTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        FornecedorTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("cliente"));
-        transacoesTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("tipoCredito"));
-        requesicaoTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("requesicao"));
-        valorTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("valor"));
-        tblTodosFornecedores.setItems(FXCollections.observableArrayList(Gestor.getInstanceFornecedores().getDAO()
-                .todasAsComprasEntreDatas(LocalDate.parse(ano+"-01-01"), LocalDate.parse(ano+"-12-31")).getElements()));
-        tblTodosFornecedores.getSortOrder().add(dataTodosFornecedores);
+        FornecedorTodosFornecedores.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        debitoTodosFornecedores.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente, Double>, ObservableValue<Double>>() {
+            @Override
+            public ObservableValue<Double> call(TableColumn.CellDataFeatures<Cliente, Double> param) {
+                return new SimpleObjectProperty<>(param.getValue().totalDebito("fornecedores", dataGuardadaTodosFornecedoresInicio, dataGuardadaTodosFornecedoresFim));
+            }
+        });
+        creditoTodosFornecedores.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente, Double>, ObservableValue<Double>>() {
+            @Override
+            public ObservableValue<Double> call(TableColumn.CellDataFeatures<Cliente, Double> param) {
+                return new SimpleObjectProperty<>(param.getValue().totalCredito("fornecedores", dataGuardadaTodosFornecedoresInicio, dataGuardadaTodosFornecedoresFim));
+            }
+        });
+        saldoTodosFornecedores.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente, Double>, ObservableValue<Double>>() {
+            @Override
+            public ObservableValue<Double> call(TableColumn.CellDataFeatures<Cliente, Double> param) {
+                return new SimpleObjectProperty<>(param.getValue().SaldoCliente("fornecedores", dataGuardadaTodosFornecedoresInicio, dataGuardadaTodosFornecedoresFim));
+            }
+        });
+        tblTodosFornecedores.setItems(FXCollections.observableArrayList(Gestor.getInstanceFornecedores().todosClientes()));
         
         
         /***************************************************
@@ -539,7 +541,7 @@ public class FXMLLancamentosController extends Stage {
     @FXML
     void handleImprimirTodosLancamentosClientes(MouseEvent event) {
          try {
-            new GerarPDF(tblTodosClientes, "Todos os Clientes");
+            new GerarPDFTodos(tblTodosClientes, "Todos os Clientes", dataGuardadaTodosClientesInicio, dataGuardadaTodosClientesFim, "clientes");
         } catch (IOException ex) {
             Logger.getLogger(FXMLLancamentosController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -565,11 +567,7 @@ public class FXMLLancamentosController extends Stage {
     void handleTodosDocumentosTodosFornecedores(MouseEvent event) {
         txtDtTodosFornecedores1.setValue(null);
         txtDtTodosFornecedores2.setValue(null);
-        List<Compras> compras = Gestor.getInstanceFornecedores().getDAO()
-        .todasAsComprasEntreDatas(LocalDate.parse(ano+"-01-01"), LocalDate.parse(ano+"-12-31")).getElements();
-        compras.sort(Compras.comparator);
-        tblTodosFornecedores.setItems(FXCollections.observableArrayList(compras));
-
+        tblTodosFornecedores.refresh();
     }
     
     /**************************************
@@ -642,30 +640,18 @@ public class FXMLLancamentosController extends Stage {
          * selecionar compra numa data do lado de
          * todos os fornecedores
          */
-        txtDtTodosFornecedores1.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if(Gestor.getInstanceFornecedores().getDAO().todasAsComprasNumaDatas(newValue) == null)
-                tblTodosFornecedores.setItems(null);
-            else {
-                this.dataGuardadaTodosFornecedores = newValue;
-                List<Compras> compras = Gestor.getInstanceFornecedores().getDAO().todasAsComprasNumaDatas(dataGuardadaTodosFornecedores).getElements();
-                compras.sort(Compras.comparator);
-                tblTodosFornecedores.setItems(FXCollections.observableArrayList(compras));
-            }
+        txtDtTodosFornecedores1.valueProperty().addListener((ov, oldValue, novaDataInicio) -> {
+            dataGuardadaTodosFornecedoresInicio = novaDataInicio;
+            tblTodosFornecedores.refresh();
         });
         /********************************************************
          * selecionar entre datas de todos os fornecedores
          * 
          */
         
-        txtDtTodosFornecedores2.valueProperty().addListener((ov, oldValue, newValue) -> {
-            if(Gestor.getInstanceFornecedores().getDAO().todasAsComprasEntreDatas(dataGuardadaTodosFornecedores, newValue) == null)
-                tblTodosFornecedores.setItems(null);
-            else {
-                List<Compras> compras = Gestor.getInstanceFornecedores().getDAO().todasAsComprasEntreDatas(dataGuardadaTodosFornecedores, newValue).getElements();
-                compras.sort(Compras.comparator);
-                tblTodosFornecedores.setItems(FXCollections.observableArrayList(compras));
-            }
-
+        txtDtTodosFornecedores2.valueProperty().addListener((ov, oldValue, novaDataFim) -> {
+            dataGuardadaTodosFornecedoresFim = novaDataFim;
+            tblTodosFornecedores.refresh();
         });
         
         /****************************************
