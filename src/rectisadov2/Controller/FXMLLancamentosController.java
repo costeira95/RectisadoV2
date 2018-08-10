@@ -34,13 +34,13 @@ import rectisadov2.AppStart;
 import rectisadov2.Controller.Cliente.FXMLAdicionarCompraController;
 import rectisadov2.Controller.Cliente.FXMLEditarCompraController;
 import rectisadov2.Controller.Fornecedor.FXMLAdicionarCompraFornecedorController;
-import rectisadov2.Model.PDF.GerarPDFTodos;
 import rectisadov2.model.NumberTableCellFactory;
 import rectisadov2.model.Cliente;
 import rectisadov2.model.Compras;
 import rectisadov2.model.ECredito;
 import rectisadov2.model.Gestor;
 import rectisadov2.model.PDF.GerarPDF;
+import rectisadov2.model.PDF.GerarPDFTodos;
 
 /**
  * FXML Controller class
@@ -540,7 +540,7 @@ public class FXMLLancamentosController extends Stage {
     
     @FXML
     void handleImprimirTodosLancamentosClientes(MouseEvent event) {
-         try {
+        try {
             new GerarPDFTodos(tblTodosClientes, "Todos os Clientes", dataGuardadaTodosClientesInicio, dataGuardadaTodosClientesFim, "clientes");
         } catch (IOException ex) {
             Logger.getLogger(FXMLLancamentosController.class.getName()).log(Level.SEVERE, null, ex);
@@ -550,7 +550,7 @@ public class FXMLLancamentosController extends Stage {
     @FXML
     void handleImprimirTodosLancamentosFornecedor(MouseEvent event) {
         try {
-            new GerarPDF(tblTodosFornecedores, "Todos os Fornecedores");
+            new GerarPDFTodos(tblTodosFornecedores, "Todos os Fornecedores", dataGuardadaTodosFornecedoresInicio, dataGuardadaTodosFornecedoresFim, "fornecedores");
         } catch (IOException ex) {
             Logger.getLogger(FXMLLancamentosController.class.getName()).log(Level.SEVERE, null, ex);
         }

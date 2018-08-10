@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rectisadov2.Model.PDF;
+package rectisadov2.model.PDF;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -25,10 +25,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javafx.scene.control.TableView;
 import rectisadov2.model.Cliente;
-import rectisadov2.model.Compras;
-import rectisadov2.model.ECredito;
-import rectisadov2.model.Gestor;
-//import rectisado.view.Dialogo;
 /**
  *
  * @author Costeira
@@ -41,7 +37,7 @@ public class GerarPDFTodos extends Document {
     public GerarPDFTodos(TableView tableView, String nome, LocalDate dataInicio, LocalDate dataFim, String tipoUtilizador) throws IOException {
         cells = new ArrayList<>();
         this.nome = nome;
-        table = new PdfPTable(new float[]{2, 3, 7, 2, 2, 3});
+        table = new PdfPTable(new float[]{2, 3, 7, 2});
         try {
             criarTopo();
             criarTitulos();
@@ -54,7 +50,7 @@ public class GerarPDFTodos extends Document {
             Iterator<Cliente> it = tableView.getItems().iterator();     
             while(it.hasNext()) {
                 criarCelulaPorCliente(it.next(), dataInicio, dataFim, tipoUtilizador);
-            }            
+            }
             table.setWidthPercentage(100);
 
             add(table);
