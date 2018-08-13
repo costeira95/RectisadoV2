@@ -8,14 +8,12 @@ package rectisadov2.Controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -672,11 +670,26 @@ public class FXMLLancamentosController extends Stage {
             tblTodosClientes.refresh();
         });
         
+        /****************************************************
+         * Se o cliente ou o fornecedor estiver selecionado
+         * mostrar o saldo do cliente na lbl respectiva
+         */
         if(Gestor.getInstance().getClienteActual() != null)
             lblSaldoCliente.setText(Gestor.getInstance().getClienteActual().SaldoCliente("clientes", null, null).toString());
         if(Gestor.getInstanceFornecedores().getFornecedorActual()!= null)
             lblSaldoFornecedor.setText(Gestor.getInstanceFornecedores().getFornecedorActual().SaldoCliente("fornecedores", null, null).toString());
-    }
-    
-    
+        /***********************************************************
+         * Verificar se tem clientes ou fornecedores carregados
+         * se não tiver então carrega os dois
+         */
+        if(!Gestor.getInstance().isClientesCarregados()) {
+            Gestor.getInstance().load();
+            Gestor.getInstance().setClientesCarregados(true);
+        }
+        if(!Gestor.getInstanceFornecedores().isFornecedoresCarregados()) {
+            Gestor.getInstanceFornecedores().load();
+            Gestor.getInstanceFornecedores().setFornecedoresCarregados(true);
+        }
+    }   
+   
 }
