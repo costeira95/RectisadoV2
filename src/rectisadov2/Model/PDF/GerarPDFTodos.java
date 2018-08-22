@@ -34,10 +34,15 @@ public class GerarPDFTodos extends Document {
     private PdfPTable table;
     private String nome;
     
+    private double totalDebito;
+    private double totalCredito;
+    private double totalSaldo;
+    
     public GerarPDFTodos(TableView tableView, String nome, LocalDate dataInicio, LocalDate dataFim, String tipoUtilizador) throws IOException {
         cells = new ArrayList<>();
+        totalCredito = totalCredito = totalSaldo = 0;
         this.nome = nome;
-        table = new PdfPTable(new float[]{2, 3, 7, 2});
+        table = new PdfPTable(new float[]{7, 3, 2, 2});
         try {
             criarTopo();
             criarTitulos();
@@ -51,6 +56,9 @@ public class GerarPDFTodos extends Document {
             while(it.hasNext()) {
                 criarCelulaPorCliente(it.next(), dataInicio, dataFim, tipoUtilizador);
             }
+            createCell("Total Crédito: " + String.valueOf(totalCredito), 20, 6, Rectangle.TOP | Rectangle.BOTTOM, 0);
+            createCell("Total Débito: " + String.valueOf(totalDebito), 5, 6, 0, 0);
+            createCell("Total Saldo: " + String.valueOf(totalSaldo), 5, 6, Rectangle.TOP, 0);
             table.setWidthPercentage(100);
 
             add(table);
@@ -67,10 +75,18 @@ public class GerarPDFTodos extends Document {
      * @param compra 
      */
     private void criarCelulaPorCliente(Cliente cliente, LocalDate dataInicio, LocalDate dataFim, String tipoUtilizador) {
+        double credito = cliente.totalCredito(tipoUtilizador, dataInicio, dataFim);
+        double debito = cliente.totalDebito(tipoUtilizador, dataInicio, dataFim);
+        double saldo = cliente.SaldoCliente(tipoUtilizador, dataInicio, dataFim);
+        
         createCell(cliente.getNome(), 5, 0, 0, Element.ALIGN_CENTER);
-        createCell(Double.toString(cliente.totalDebito(tipoUtilizador, dataInicio, dataFim)), 5, 0, 0, Element.ALIGN_CENTER);
-        createCell(Double.toString(cliente.totalCredito(tipoUtilizador, dataInicio, dataFim)), 5, 0, 0, Element.ALIGN_CENTER);
-        createCell(Double.toString(cliente.SaldoCliente(tipoUtilizador, dataInicio, dataFim)), 5, 0, 0, Element.ALIGN_CENTER);
+        createCell(Double.toString(debito), 5, 0, 0, Element.ALIGN_CENTER);
+        createCell(Double.toString(credito), 5, 0, 0, Element.ALIGN_CENTER);
+        createCell(Double.toString(saldo), 5, 0, 0, Element.ALIGN_CENTER);
+        
+        totalDebito += debito;
+        totalCredito += credito;
+        totalSaldo += saldo;
     }
     
     /*******************************************************

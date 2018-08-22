@@ -341,6 +341,7 @@ public class FXMLLancamentosController extends Stage {
             List<Compras> compras = Gestor.getInstance().getClienteActual().getListaCompras("clientes");
             compras.sort(Compras.comparator);
             tblClientes.setItems(FXCollections.observableArrayList(compras));
+            lblSaldoCliente.setText("0");
             new FXMLDialogSucessoController(appStart, this, "Lançamentos apagados com sucesso!");
         } else
             new FXMLDialogErrorController(appStart, this, "Não tem nenhum cliente selecionado!");
@@ -376,6 +377,7 @@ public class FXMLLancamentosController extends Stage {
         List<Compras> compras = Gestor.getInstance().getClienteActual().getListaCompras("clientes");
         compras.sort(Compras.comparator);
         tblClientes.setItems(FXCollections.observableArrayList(compras));
+        lblSaldoCliente.setText(Gestor.getInstance().getClienteActual().SaldoCliente("clientes", null, null).toString());
         new FXMLDialogSucessoController(appStart, this, "Lançamento apagado com sucesso!");
        } else
             new FXMLDialogErrorController(appStart, this, "Não tem nenhum cliente selecionado!");
@@ -437,6 +439,7 @@ public class FXMLLancamentosController extends Stage {
         if(Gestor.getInstanceFornecedores().getFornecedorActual() != null) {
             Gestor.getInstanceFornecedores().getFornecedorActual().removerTodasCompras("fornecedores");
             tblFornecedores.setItems(FXCollections.observableArrayList(Gestor.getInstanceFornecedores().getFornecedorActual().getListaCompras("fornecedores")));
+            lblSaldoFornecedor.setText("0");
             new FXMLDialogSucessoController(appStart, this, "Lançamentos apagados com sucesso!");
         } else
             new FXMLDialogErrorController(appStart, this, "Não tem nenhum fornecedor selecionado!");
@@ -451,6 +454,7 @@ public class FXMLLancamentosController extends Stage {
                 List<Compras> compras = Gestor.getInstanceFornecedores().getFornecedorActual().getListaCompras("fornecedores");
                 compras.sort(Compras.comparator);
                 tblFornecedores.setItems(FXCollections.observableArrayList(compras));
+                lblSaldoFornecedor.setText(Gestor.getInstance().getClienteActual().SaldoCliente("fornecedores", null, null).toString());
                 new FXMLDialogSucessoController(appStart, this, "Lançamento apagado com sucesso!");
         } else
             new FXMLDialogErrorController(appStart, this, "Não tem nenhum fornecedor selecionado!");
