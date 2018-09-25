@@ -83,9 +83,7 @@ public class FXMLEditarCompraController extends Stage {
         compra.editarCompra(txtDescricao.getText(), 
                 Double.parseDouble(txtValor.getText()), Integer.parseInt(txtRequesicao.getText()),
                 cbTransacao.getValue(), dtCompra.getValue(), tipoCliente);
-          List<Compras> compras = Gestor.getInstance().getClienteActual().getListaCompras("clientes");
-          compras.sort(Compras.comparator);
-          tblView.setItems(FXCollections.observableArrayList());
+          tblView.refresh();
         new FXMLDialogSucessoController(appStart, this, "Lançamento editado com sucesso!");
     }
 

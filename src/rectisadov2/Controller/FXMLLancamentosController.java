@@ -326,6 +326,7 @@ public class FXMLLancamentosController extends Stage {
             new FXMLEditarCompraController(appStart, tblClientes, this, "cliente");
         else
             new FXMLDialogErrorController(appStart, this, "Não tem nenhum cliente selecionado!");
+        lblSaldoCliente.setText(Gestor.getInstance().getClienteActual().SaldoCliente("clientes", null, null).toString());
     }
     
     /****************************************
@@ -473,6 +474,7 @@ public class FXMLLancamentosController extends Stage {
             new FXMLEditarCompraController(appStart, tblFornecedores, this, "fornecedores");
         else
             new FXMLDialogErrorController(appStart, this, "Não tem nenhum fornecedor selecionado!");
+        lblSaldoFornecedor.setText(Gestor.getInstanceFornecedores().getFornecedorActual().SaldoCliente("fornecedores", null, null).toString());
     }
     
     /**********************************
